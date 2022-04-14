@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require("cors");
 const userRoute = require("./routes/userRouter")
+const postRoute = require("./routes/postRouter")
 const mongoose = require("mongoose");
 mongoose.connect(process.env.DBURL, { useNewUrlParser: true });
 const db = mongoose.connection;
@@ -19,6 +20,7 @@ app.get('/', (req, res, next) =>{
 })
 
 app.use('/users', userRoute)
+app.use('/posts', postRoute)
 
 app.listen(app.get('port'), server =>{
     console.info(`Server listen on port ${app.get('port')}`);
