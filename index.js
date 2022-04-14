@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require('express');
 const app = express();
 const cors = require("cors");
+const userRoute = require("./routes/userRouter")
 const mongoose = require("mongoose");
 mongoose.connect(process.env.DBURL, { useNewUrlParser: true });
 const db = mongoose.connection;
@@ -16,6 +17,8 @@ app.set('port', process.env.port || 3000)
 app.get('/', (req, res, next) =>{
     res.send('<h1>Hello world<h1>');
 })
+
+app.use('/users', userRoute)
 
 app.listen(app.get('port'), server =>{
     console.info(`Server listen on port ${app.get('port')}`);
