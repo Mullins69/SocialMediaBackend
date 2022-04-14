@@ -18,7 +18,7 @@ router.get("/", auth, async (req, res, next) => {
 });
 
 //Adds a new post
-router.post("/:id", [auth, getPost], async (req, res, next) => {
+router.post("/", [auth], async (req, res, next) => {
     let { details, title, img } = req.body;
     let user_id = req.user._id;
     const posts = new Post({
@@ -28,8 +28,7 @@ router.post("/:id", [auth, getPost], async (req, res, next) => {
         user_id,
     })
     try {
-        posts.posts.push({
-            post_id,
+        posts.post.push({
             title,
             img,
             details,

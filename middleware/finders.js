@@ -13,5 +13,17 @@ async function getUser(req, res, next) {
   res.user = user;
   next();
 }
+async function getPost(req, res, next) {
+  let post;
+  try {
+    post = await Post.findById(req.params.id);
 
-module.exports = { getUser };
+    if (!post) res.status(404).json({ message: "Could not find post" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+  res.post = post;
+  next();
+}
+
+module.exports = { getUser, getPost };
